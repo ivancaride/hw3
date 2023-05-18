@@ -1,0 +1,19 @@
+<!-- Place details page -->
+
+<h1><%= @place["name"] %></h1>
+
+<h3> Posts </h3>
+
+<ul>
+  <% for post in @posts %>
+    <li><%= post["title"] %>,<%= post["posted_on"] %>,<%= post["description"] %></li>
+  <% end %>
+</ul>
+
+<p>
+  <a href="/posts/new?place_id=<%= @place["id"] %>">New post</a>
+</p>
+
+<p><a href="/places">Back to All places</a></p>
+
+<p><%= button_to "Delete this place", @place, :method => "delete" %></p>

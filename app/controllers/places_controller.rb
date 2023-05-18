@@ -6,7 +6,8 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @place = place.find_by({ "id" => params["id"] })
+    @place = Place.find_by({"id" => params["id"] })
+    @posts = Post.where({ "place_id" => @place["id"] })
   end
 
   def new
@@ -15,7 +16,6 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.new
-
     @place["name"] = params["place"]["name"]
   #save place row
     @place.save
@@ -23,33 +23,31 @@ class PlacesController < ApplicationController
     redirect_to "/places"
   end
 
-#REVISAR
-
   def edit
     #find a place
       @place = Place.find_by({ "id" => params["id"] })
     #render view with edit place form
   end
     
-    def update
+  def update
     #find a place
-      @place = Place.find_by({ "id" => params["id"] })
+    @place = Place.find_by({ "id" => params["id"] })
     #assign user-entered form data to place's columns  
-      @place["name"] = params["place"]["name"]
+    @place["name"] = params["place"]["name"]
       
     #   # save place row
-      @place.save
+    @place.save
     #   # redirect user
-      redirect_to "/places"
-    end
+    redirect_to "/places"
+  end
     
-    def destroy
+  def destroy
     #   # find a place
-      @place = Place.find_by({ "id" => params["id"] })
+    @place = Place.find_by({ "id" => params["id"] })
         # destroy place row
-      @place.destroy
+    @place.destroy
     #   # redirect user
-      redirect_to "/places"
-    end    
+    redirect_to "/places"
+  end    
   
 end
