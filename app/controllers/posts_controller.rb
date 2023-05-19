@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @place = Place.find_by({ "id" => params["place_id"] })
-    @post["place_id"] = @post["id"]
-  #   # render posts/new view with new Post form
+    @post["place_id"] = @place["id"]
+  #render posts/new view with new Post form
   end
 
   def create
@@ -18,13 +18,13 @@ class PostsController < ApplicationController
     @post["title"] = params["post"]["title"]
     @post["posted_on"] = params["post"]["posted_on"]
     @post["description"] = params["post"]["description"]
-    
+
+  #assign relationship between post and place
+    @post["place_id"] = params["post"]["place_id"]
+
   #save Post row
     @post.save
   #redirect user (/#{@post["company_id"]}")
-    redirect_to "/posts"
-  
-   
+    redirect_to "/places/#{@post["place_id"]}"
   end
-  
 end
