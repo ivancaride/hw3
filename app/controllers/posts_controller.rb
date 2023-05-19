@@ -28,3 +28,4 @@ class PostsController < ApplicationController
     redirect_to "/places/#{@post["place_id"]}"
   end
 end
+
